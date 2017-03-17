@@ -106,6 +106,7 @@
       "__id__": 2
     },
     "_enabled": true,
+    "moveDuration": 1,
     "paperShow": {
       "__id__": 4
     },
