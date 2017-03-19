@@ -13,6 +13,14 @@ cc.Class({
         // },
         // ...
         moveDuration:1,
+        loadingBar:{
+            default: null,
+            type: cc.ProgressBar
+        },
+        loadingTips: {
+            default: null,
+            type: cc.Label
+        },
         paperShow:{
             default:null,
             type:cc.Sprite
