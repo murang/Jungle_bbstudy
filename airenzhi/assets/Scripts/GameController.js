@@ -15,6 +15,8 @@ cc.Class({
         // },
         // ...
         moveDuration:1,
+        coolDownTime:3,
+        canvas: cc.Node,
         buttonPlay:{
             default: null,
             type: cc.Button
@@ -60,7 +62,8 @@ cc.Class({
         content_data:null,
         content_count:0,
         content_index:0,
-        touch_cooldown:false,
+        isTouchCooldown:false,
+        isMoveActionTrigger:false,
         res_wan:null
     },
 
@@ -72,6 +75,27 @@ cc.Class({
         cc.loader.loadRes('wan1', function(err, res){
             _this.res_wan = res;
         });
+        this.canvas.on(cc.Node.EventType.TOUCH_START, function (event) {
+            // if(!_this.isTouchCooldown || _this.isMoveActionTrigger)return false;
+        }, self.node);
+        this.canvas.on(cc.Node.EventType.TOUCH_MOVE, function (event) {
+            if(!_this.isTouchCooldown || _this.isMoveActionTrigger)return;
+            var touches = event.getTouches();
+            var touchLoc = touches[0].getLocation();
+            var touchStartLoc = touches[0].getStartLocation();
+            cc.log('begin y = ' + touchStartLoc.y + '  now y = ' + touchLoc.y);
+            if(touchLoc.y - touchStartLoc.y >= 100){
+                _this.isMoveActionTrigger = true;
+                _this.moveBackward();
+            }else if(touchStartLoc.y - touchLoc.y >= 100){
+                _this.isMoveActionTrigger = true;
+                _this.moveForward();
+            }
+        }, self.node);
+        this.canvas.on(cc.Node.EventType.TOUCH_END, function (event) {
+            cc.log('touch end');
+            _this.isMoveActionTrigger = false;
+        }, self.node);
     },
 
     _loadJson:function(appid){
@@ -126,6 +150,10 @@ cc.Class({
 
     missionBegin:function(){
         this.buttonPlay.node.active = false;
+        this.isTouchCooldown = false;
+        this.scheduleOnce(function(){
+            this.isTouchCooldown = true;
+        }, this.coolDownTime);
         cc.audioEngine.play(this.res_aud_cntop,false);
         this.content_index = 1;
         this.labelHide.string = this.content_data["str_items_cn"][0] +' '+ this.content_data["str_items_en"][0];
@@ -143,10 +171,12 @@ cc.Class({
     },
 
     moveForward:function(){
-        if(this.content_index > this.content_count){
-            return;
-        }
-        else if(this.content_index == this.content_count){
+        if(this.content_index > this.content_count)return;
+        this.isTouchCooldown = false;
+        this.scheduleOnce(function(){
+            this.isTouchCooldown = true;
+        }, this.coolDownTime);
+        if(this.content_index == this.content_count){
             this.content_index++;
             this.labelHide.string = '';
             this.paperHideCard.spriteFrame = new cc.SpriteFrame(this.res_wan); 
@@ -177,7 +207,28 @@ cc.Class({
     },
     
     moveBackward:function(){
-
+        if(this.content_index <=1)return;
+        this.isTouchCooldown = false;
+        this.scheduleOnce(function(){
+            this.isTouchCooldown = true;
+        }, this.coolDownTime);
+        this.content_index--;        
+        this.paperHide.node.y = -15;
+        if(this.content_index  == this.content_count){
+            this.labelHide.string = '';
+        }else{
+            this.labelHide.string = this.content_data["str_items_cn"][this.content_index] +' '+ this.content_data["str_items_en"][this.content_index];
+        }
+        this.paperHideCard.spriteFrame = new cc.SpriteFrame(this.res_pics[this.content_index]);   
+        this.labelShow.string = this.content_data["str_items_cn"][this.content_index-1] +' '+ this.content_data["str_items_en"][this.content_index-1];
+        this.paperShowCard.spriteFrame = new cc.SpriteFrame(this.res_pics[this.content_index-1]);
+        var actions = cc.sequence(
+            cc.moveBy(this.moveDuration, cc.p(0, 720)),
+            cc.callFunc(function () {
+                this._playAudioByIndex(this.content_index-1);
+            }, this)
+            );
+        this.paperHide.node.runAction(actions);
     },
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
