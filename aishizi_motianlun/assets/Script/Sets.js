@@ -21,9 +21,14 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        // this.setBoardString('fuck');
     },
 
-    setHightLight:function(isHighLight){
+    setBoardString:function(str){
+         this.node.getChildByName('board').getChildByName('label').getComponent(cc.Label).string = str;
+    },
+
+    setHighLight:function(isHighLight){
         if(isHighLight){
             this.getComponent(cc.Sprite).spriteFrame = this.sf_bg_hl;
             this.node.getChildByName('board').getComponent(cc.Sprite).spriteFrame = this.sf_board_hl;

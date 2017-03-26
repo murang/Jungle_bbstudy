@@ -1,0 +1,44 @@
+{
+    "wenzi_1": [
+        "胖",
+        "盘",
+        "风",
+        "灯",
+        "盆"
+    ],
+    "wenzi_2": [
+        "北",
+        "吓",
+        "石",
+        "光",
+        "夸"
+    ],
+    "pinyin_1": [
+        "pàng",
+        "pán",
+        "fēng",
+        "dēng",
+        "pén"
+    ],
+    "pinyin_2": [
+        "běi",
+        "xià",
+        "shí",
+        "guāng",
+        "kuā"
+    ],
+    "audio_res_1": [
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-motianlun-audio/3040102/1_1.mp3",
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-motianlun-audio/3040102/1_2.mp3",
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-motianlun-audio/3040102/1_3.mp3",
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-motianlun-audio/3040102/1_4.mp3",
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-motianlun-audio/3040102/1_5.mp3"
+    ],
+    "audio_res_2": [
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-motianlun-audio/3040102/2_1.mp3",
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-motianlun-audio/3040102/2_2.mp3",
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-motianlun-audio/3040102/2_3.mp3",
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-motianlun-audio/3040102/2_4.mp3",
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-motianlun-audio/3040102/2_5.mp3"
+    ]
+}
