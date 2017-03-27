@@ -1,4 +1,7 @@
-var APPID = 3040102;
+var http = require("http");
+var storage = require("storage");
+
+var CURRENT_APPID = 3040102;
 
 cc.Class({
     extends: cc.Component,
@@ -14,6 +17,12 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        timeDisplayPrefab: cc.Prefab,
+        timeDisplay: cc.Node,
+
+        //enum: ["playing", "pause", "playedDone"]
+        playStatus: "pause",
+
         loadingNode:{
             default: null,
             type: cc.ProgressBar
@@ -63,15 +72,28 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        this.setAppID();
+        this.setAccessToken();
+        this._loadJson(CURRENT_APPID);
         this.wheel.node.rotation = 36;
-        this._loadJson();
         cc.loader.loadResDir('audio', function(err, audios){});
         this._clearQuestion();
+        this.initTimeTick();
+    },
+
+    initTimeTick: function(){
+        var context = this;
+        var timeDisplayNode = cc.instantiate(context.timeDisplayPrefab);
+
+        // Prefab添加引用: timeTick跟 game 组件相互添加引用
+        timeDisplayNode.getComponent('TimeTick').game = context;
+        context.timeDisplay.addChild(timeDisplayNode);
     },
 
     missionBegin:function(){
         cc.audioEngine.play('res/raw-assets/resources/audio/bgMusic.mp3', true);
         this._initMission();
+        this.playStatus = "playing";
     },
 
     btnClicked_1:function(){
@@ -276,8 +298,8 @@ cc.Class({
         this.current_answer = '';
     },
 
-    _loadJson:function(){
-        var url = cc.url.raw('resources/content/'+APPID+'/content.json');
+    _loadJson:function(appid){
+        var url = cc.url.raw('resources/content/'+appid+'/content.json');
         var _this = this;
         cc.loader.load(url, function (err, jsondata) {
             _this.wenzi_1 = jsondata['wenzi_1'];
@@ -289,6 +311,17 @@ cc.Class({
             var res_totle = _this.res_aud_1.concat(_this.res_aud_2);
             _this.loadingNode.getComponent('LoadRes').loadResources(res_totle);
         });
+    },
+
+    setAppID: function(){
+        if(http.parseCurrentAppID().length > 0){
+            CURRENT_APPID = http.parseCurrentAppID();
+        };
+        storage.setCurrentAppID(CURRENT_APPID);
+    },
+
+    setAccessToken: function(){
+        storage.setCurrentAccessToken(http.parseCurrentAccessToken());
     },
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
