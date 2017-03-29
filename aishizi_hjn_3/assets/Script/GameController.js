@@ -98,10 +98,13 @@ cc.Class({
         this.initTimeTick();        
         this._loadJson(CURRENT_APPID);
         this.gameOver = cc.find('GameOver').getComponent('GameOver');
-        cc.audioEngine.play('res/raw-assets/resources/audio/bgMusic.mp3', true);
+        
     },
 
     missionBegin:function(){
+        cc.audioEngine.stopAll();
+        cc.audioEngine.play("http://omr2m40qu.bkt.clouddn.com/public-audio/click.mp3", false);
+        cc.audioEngine.play('res/raw-assets/resources/audio/bgMusic.mp3', true);
         this.initMission();
         this.playStatus = "playing";
     },
@@ -277,7 +280,9 @@ cc.Class({
             _this.wenzi = jsondata['wenzi'];
             _this.pinyin = jsondata['pinyin'];
             _this.res_audio = jsondata['audio_res'];
-            _this.loadingNode.getComponent('LoadRes').loadResources(_this.res_audio);
+            var res_totle = ["http://omr2m40qu.bkt.clouddn.com/public-audio/click.mp3"];
+            res_totle = res_totle.concat(_this.res_audio);
+            _this.loadingNode.getComponent('LoadRes').loadResources(res_totle);
         });
     },
 

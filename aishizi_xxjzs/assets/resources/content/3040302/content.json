@@ -1,0 +1,44 @@
+{
+    "wenzi_1": [
+        "果",
+        "桃",
+        "肚",
+        "吃",
+        "送"
+    ],
+    "wenzi_2": [
+        "兄",
+        "妹",
+        "果",
+        "女",
+        "父"
+    ],
+    "pinyin_1": [
+        "guǒ",
+        "táo",
+        "dù",
+        "chī",
+        "sòng"
+    ],
+    "pinyin_2": [
+        "xiōng",
+        "mèi",
+        "guǒ",
+        "nǚ",
+        "fù"
+    ],
+    "audio_res_1": [
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-xxjzs-audio/3040302/1_1.mp3",
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-xxjzs-audio/3040302/1_2.mp3",
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-xxjzs-audio/3040302/1_3.mp3",
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-xxjzs-audio/3040302/1_4.mp3",
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-xxjzs-audio/3040302/1_5.mp3"        
+    ],
+    "audio_res_2": [
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-xxjzs-audio/3040302/2_1.mp3",        
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-xxjzs-audio/3040302/2_2.mp3",        
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-xxjzs-audio/3040302/2_3.mp3",        
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-xxjzs-audio/3040302/2_4.mp3",        
+        "http://omr2m40qu.bkt.clouddn.com/aishizi-xxjzs-audio/3040302/2_5.mp3"
+    ]
+}

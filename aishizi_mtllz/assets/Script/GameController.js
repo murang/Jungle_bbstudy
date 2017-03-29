@@ -27,6 +27,7 @@ cc.Class({
             default: null,
             type: cc.ProgressBar
         },
+        btn_begin:cc.Button,
         wheel:cc.Sprite,
         btn_1:cc.Button,
         btn_2:cc.Button,
@@ -78,7 +79,6 @@ cc.Class({
         this.wheel.node.rotation = 36;
         this._clearQuestion();
         this.initTimeTick();
-        cc.audioEngine.play('res/raw-assets/resources/audio/bgMusic.mp3', true);
     },
 
     initTimeTick: function(){
@@ -91,7 +91,10 @@ cc.Class({
     },
 
     missionBegin:function(){
-        
+        this.btn_begin.node.active = false;
+        cc.audioEngine.stopAll();
+        cc.audioEngine.play("http://omr2m40qu.bkt.clouddn.com/public-audio/click.mp3", false);
+        cc.audioEngine.play('res/raw-assets/resources/audio/bgMusic.mp3', true);
         this._initMission();
         this.playStatus = "playing";
     },
@@ -309,6 +312,7 @@ cc.Class({
             _this.res_aud_1 = jsondata['audio_res_1'];
             _this.res_aud_2 = jsondata['audio_res_2'];
             var res_totle = _this.res_aud_1.concat(_this.res_aud_2);
+            res_totle.push("http://omr2m40qu.bkt.clouddn.com/public-audio/click.mp3");
             _this.loadingNode.getComponent('LoadRes').loadResources(res_totle);
         });
     },

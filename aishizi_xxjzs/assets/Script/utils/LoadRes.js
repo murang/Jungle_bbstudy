@@ -35,6 +35,11 @@ cc.Class({
         cc.loader.load(resList, this._progressCallback.bind(this), this._completeCallback.bind(this));
     },
 
+    startMission:function(){
+        this.loadingLayout.node.active = false;
+        this.gameController.missionBegin();
+    },
+
     _progressCallback: function (completedCount, totalCount, res) {
         this.progress = completedCount / totalCount;
         this.resource = res;
@@ -43,7 +48,7 @@ cc.Class({
     },
 
     _completeCallback: function (error, res) {
-        this.loadingLayout.node.active = false;
+        this.node.active = false;
         this.btnBegin.node.active = true;
     },
 
