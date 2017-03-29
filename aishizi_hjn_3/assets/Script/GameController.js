@@ -98,10 +98,10 @@ cc.Class({
         this.initTimeTick();        
         this._loadJson(CURRENT_APPID);
         this.gameOver = cc.find('GameOver').getComponent('GameOver');
+        cc.audioEngine.play('res/raw-assets/resources/audio/bgMusic.mp3', true);
     },
 
     missionBegin:function(){
-        cc.audioEngine.play('res/raw-assets/resources/audio/bgMusic.mp3', true);
         this.initMission();
         this.playStatus = "playing";
     },
@@ -164,13 +164,13 @@ cc.Class({
 
     selectRight:function(whichBird){
         this.current_score++;
-        cc.audioEngine.play('res/raw-assets/resources/audio/bird_fly.mp3', true);
+        cc.audioEngine.play('res/raw-assets/resources/audio/bird_fly.mp3', false);
         this.addStar(true);
         whichBird.getComponent('Bird').shangtian();
     },
     
     selectWrong:function(whichBird){
-        cc.audioEngine.play('res/raw-assets/resources/audio/bird_fall.mp3', true);
+        cc.audioEngine.play('res/raw-assets/resources/audio/bird_fall.mp3', false);
         this.addStar(false);
         whichBird.getComponent('Bird').rudi();
     },
@@ -198,6 +198,9 @@ cc.Class({
     },
 
     missionOver:function(isWin){
+        if(isWin){
+            cc.audioEngine.play('res/raw-assets/resources/audio/great.mp3', false);
+        }
         this.gameOver.showGameOver(isWin);
     },
 

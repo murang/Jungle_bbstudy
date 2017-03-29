@@ -76,9 +76,9 @@ cc.Class({
         this.setAccessToken();
         this._loadJson(CURRENT_APPID);
         this.wheel.node.rotation = 36;
-        cc.loader.loadResDir('audio', function(err, audios){});
         this._clearQuestion();
         this.initTimeTick();
+        cc.audioEngine.play('res/raw-assets/resources/audio/bgMusic.mp3', true);
     },
 
     initTimeTick: function(){
@@ -91,7 +91,7 @@ cc.Class({
     },
 
     missionBegin:function(){
-        cc.audioEngine.play('res/raw-assets/resources/audio/bgMusic.mp3', true);
+        
         this._initMission();
         this.playStatus = "playing";
     },
