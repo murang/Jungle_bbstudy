@@ -444,7 +444,7 @@
     "__type__": "cc.Node",
     "_name": "board_1",
     "_objFlags": 0,
-    "_opacity": 255,
+    "_opacity": 0,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -672,7 +672,7 @@
     "__type__": "cc.Node",
     "_name": "board_2",
     "_objFlags": 0,
-    "_opacity": 255,
+    "_opacity": 0,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -1483,7 +1483,7 @@
     "_tag": -1,
     "_opacityModifyRGB": false,
     "_id": "c03c61zUfNDFJmjZ8Qcxt9i",
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 46

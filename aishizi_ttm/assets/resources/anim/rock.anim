@@ -3,7 +3,7 @@
   "_name": "rock",
   "_objFlags": 0,
   "_rawFiles": null,
-  "_duration": 1.0166666666666666,
+  "_duration": 1.05,
   "sample": 60,
   "speed": 1,
   "wrapMode": 1,
@@ -51,6 +51,12 @@
             "frame": 1,
             "value": {
               "__uuid__": "86685e6d-e192-40ce-99e0-150e644f933d"
+            }
+          },
+          {
+            "frame": 1.0333333333333334,
+            "value": {
+              "__uuid__": "30ee8016-7dac-444f-9c1f-806c363ede6e"
             }
           }
         ]
