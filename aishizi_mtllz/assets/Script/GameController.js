@@ -305,12 +305,27 @@ cc.Class({
         var url = cc.url.raw('resources/content/'+appid+'/content.json');
         var _this = this;
         cc.loader.load(url, function (err, jsondata) {
-            _this.wenzi_1 = jsondata['wenzi_1'];
-            _this.wenzi_2 = jsondata['wenzi_2'];
-            _this.pinyin_1 = jsondata['pinyin_1'];
-            _this.pinyin_2 = jsondata['pinyin_2'];
-            _this.res_aud_1 = jsondata['audio_res_1'];
-            _this.res_aud_2 = jsondata['audio_res_2'];
+            var datas = jsondata['data'];
+            for(var i in datas){
+                var data = datas[i];
+                if(i < 5){
+                    _this.wenzi_1.push(data['wenzi']);
+                    _this.pinyin_1.push(data['pinyin']);
+                    var ar_str = 'http://omr2m40qu.bkt.clouddn.com/'+appid+'/'+data['audio_res'];
+                    _this.res_aud_1.push(ar_str);
+                }else{
+                    _this.wenzi_2.push(data['wenzi']);
+                    _this.pinyin_2.push(data['pinyin']);
+                    var ar_str = 'http://omr2m40qu.bkt.clouddn.com/'+appid+'/'+data['audio_res'];
+                    _this.res_aud_2.push(ar_str);
+                }
+            }
+            // _this.wenzi_1 = jsondata['wenzi_1'];
+            // _this.wenzi_2 = jsondata['wenzi_2'];
+            // _this.pinyin_1 = jsondata['pinyin_1'];
+            // _this.pinyin_2 = jsondata['pinyin_2'];
+            // _this.res_aud_1 = jsondata['audio_res_1'];
+            // _this.res_aud_2 = jsondata['audio_res_2'];
             var res_totle = _this.res_aud_1.concat(_this.res_aud_2);
             res_totle.push("http://omr2m40qu.bkt.clouddn.com/public-audio/click.mp3");
             _this.loadingNode.getComponent('LoadRes').loadResources(res_totle);

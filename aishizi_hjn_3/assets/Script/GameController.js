@@ -277,9 +277,17 @@ cc.Class({
         var url = cc.url.raw('resources/content/'+appid+'/content.json');
         var _this = this;
         cc.loader.load(url, function (err, jsondata) {
-            _this.wenzi = jsondata['wenzi'];
-            _this.pinyin = jsondata['pinyin'];
-            _this.res_audio = jsondata['audio_res'];
+            var datas = jsondata['data'];
+            for(var i in datas){
+                var data = datas[i];
+                _this.wenzi.push(data['wenzi']);
+                _this.pinyin.push(data['pinyin']);
+                var ra_str = 'http://omr2m40qu.bkt.clouddn.com/'+appid+'/'+data['audio_res'];
+                _this.res_audio.push(ra_str);
+            }
+            // _this.wenzi = jsondata['wenzi'];
+            // _this.pinyin = jsondata['pinyin'];
+            // _this.res_audio = jsondata['audio_res'];
             var res_totle = ["http://omr2m40qu.bkt.clouddn.com/public-audio/click.mp3"];
             res_totle = res_totle.concat(_this.res_audio);
             _this.loadingNode.getComponent('LoadRes').loadResources(res_totle);

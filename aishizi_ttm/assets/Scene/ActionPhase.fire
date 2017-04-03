@@ -154,7 +154,8 @@
     "pinyin": [],
     "res_audio": [],
     "current_answer": "",
-    "touchCD": false
+    "touchCD": false,
+    "time": 30
   },
   {
     "__type__": "cc.Node",

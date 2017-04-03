@@ -42,7 +42,8 @@ cc.Class({
         pinyin:[],
         res_audio:[],
         current_answer:'',
-        touchCD:false
+        touchCD:false,
+        time:30
     },
 
     // use this for initialization
@@ -63,12 +64,14 @@ cc.Class({
     },
 
     missionOver:function(isWin){
+        this.touchCD = false;
         this.gameOver.showGameOver(isWin);
     },
 
     jumpLeft:function(){
         if(!this.touchCD)return;
         this.touchCD = false;
+        cc.audioEngine.play('res/raw-assets/resources/audio/bubu.mp3', false);
         this.bg_1.node.runAction(cc.moveBy(1, 0, -500));
         this.bg_2.node.runAction(cc.moveBy(1, 0, -500));
         this.board_1.node.runAction(cc.moveBy(1, 0, -500));
@@ -92,6 +95,7 @@ cc.Class({
     jumpRight:function(){
         if(!this.touchCD)return;
         this.touchCD = false;
+        cc.audioEngine.play('res/raw-assets/resources/audio/bubu.mp3', false);
         this.bg_1.node.runAction(cc.moveBy(1, 0, -500));
         this.bg_2.node.runAction(cc.moveBy(1, 0, -500));
         this.board_1.node.runAction(cc.moveBy(1, 0, -500));
@@ -148,9 +152,14 @@ cc.Class({
     selectWrong:function(){
         var seq = cc.sequence(
             cc.callFunc(function () {
+                cc.audioEngine.play('res/raw-assets/resources/audio/dj1.mp3', false);
                 this.cat.getComponent(cc.Animation).play('rock');
             }, this),
-            cc.delayTime(1.2),
+            cc.delayTime(0.5),
+            cc.callFunc(function () {
+                cc.audioEngine.play('res/raw-assets/resources/audio/dj.mp3', false);
+            }, this),
+            cc.delayTime(0.7),
             cc.callFunc(function () {
                 this.missionOver(false);
             }, this)
@@ -184,6 +193,7 @@ cc.Class({
     },
 
     _initQuestion:function(a_1, a_2, a_right){
+        this.time = 30;
         this.current_answer = a_right;
         this.label_1.string = a_1;
         this.label_2.string = a_2;
@@ -204,6 +214,13 @@ cc.Class({
         if(this.bg_2.node.y <= -2500){
             this.bg_2.node.y = this.bg_2.node.y+5000;
         } 
+    },
+
+    _setTimeLimite:function(){
+        this.timeBar.progress = this.time/30;
+        if(this.time <= 0){
+            this.missionOver(false);
+        }
     },
 
     _loadJson:function(appid){
@@ -237,7 +254,10 @@ cc.Class({
         storage.setCurrentAccessToken(http.parseCurrentAccessToken());
     },
     // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
+    update: function (dt) {
+        if(this.touchCD){
+            this.time -= dt;
+            this._setTimeLimite();
+        }
+    },
 });
