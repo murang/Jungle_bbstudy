@@ -2,7 +2,7 @@ var http = require("http");
 var storage = require("storage");
 
 var RES_NETPATH = "http://omr2m40qu.bkt.clouddn.com/";
-var CURRENT_APPID = 3040402;
+var CURRENT_APPID = 3050104;
 
 
 cc.Class({
@@ -29,6 +29,10 @@ cc.Class({
         },
         gameOver:cc.Sprite,
         touchCD:false,
+        res_cn:[],
+        res_en:[],
+        res_audio:[],
+        res_image:[]
     },
 
     // use this for initialization
@@ -64,13 +68,15 @@ cc.Class({
             var datas = jsondata['data'];
             for(var i in datas){
                 var data = datas[i];
-                _this.wenzi.push(data['wenzi']);
-                _this.pinyin.push(data['pinyin']);
+                _this.res_cn.push(data['cn']);
+                _this.res_en.push(data['en']);
                 var ra_str = RES_NETPATH+appid+'/'+data['audio_res'];
                 _this.res_audio.push(ra_str);
+                var ri_str = RES_NETPATH+appid+'/'+data['image_res'];
+                _this.res_image.push(ri_str);
             }
             var res_totle = [RES_NETPATH+"public-audio/click.mp3"];
-            res_totle = res_totle.concat(_this.res_audio);
+            res_totle = res_totle.concat(_this.res_audio.concat(_this.res_image));
             _this.loadingNode.getComponent('LoadRes').loadResources(res_totle);
         });
     },

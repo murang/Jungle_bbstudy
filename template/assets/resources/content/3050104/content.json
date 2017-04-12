@@ -1,0 +1,37 @@
+{
+    "id": "3040104",
+    "title": "grape,strawberry,peach,banana,cherry",
+    "template": "过河",
+    "data": [
+        {
+            "cn": "葡萄",
+            "en": "grape",
+            "audio_res": "1.mp3",
+            "image_res": ""
+        },
+        {
+            "cn": "草莓",
+            "en": "strawberry",
+            "audio_res": "2.mp3",
+            "image_res": ""
+        },
+        {
+            "cn": "桃子",
+            "en": "peach",
+            "audio_res": "3.mp3",
+            "image_res": ""
+        },
+        {
+            "cn": "香蕉",
+            "en": "banana",
+            "audio_res": "4.mp3",
+            "image_res": ""
+        },
+        {
+            "cn": "樱桃",
+            "en": "cherry",
+            "audio_res": "5.mp3",
+            "image_res": ""
+        }
+    ]
+}
